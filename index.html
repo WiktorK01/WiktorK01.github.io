@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiktor Kolakowski - Portfolio</title>
+    <style>
+        @font-face {
+            font-family: 'Connectionii';
+            src: url('Connectionii.otf') format('opentype');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        @keyframes backgroundChange {
+            0%, 100% { background-image: url('Tile1.png'); }
+            50% { background-image: url('Tile2.png'); }
+        }
+
+        @keyframes shake {
+            0% { transform: translate(1px, 1px) rotate(0deg); }
+            10% { transform: translate(-1px, -2px) rotate(-1deg); }
+            20% { transform: translate(-3px, 0px) rotate(1deg); }
+            30% { transform: translate(3px, 2px) rotate(0deg); }
+            40% { transform: translate(1px, -1px) rotate(1deg); }
+            50% { transform: translate(-1px, 2px) rotate(-1deg); }
+            60% { transform: translate(-3px, 1px) rotate(0deg); }
+            70% { transform: translate(3px, 1px) rotate(-1deg); }
+            80% { transform: translate(-1px, -1px) rotate(1deg); }
+            90% { transform: translate(1px, 2px) rotate(0deg); }
+            100% { transform: translate(1px, -2px) rotate(-1deg); }
+        }
+
+        h1, h2, h3, p, .project-title, .project-subtitle {
+            text-shadow: 0 0 0 #ffffff;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+        }
+
+        /* Adjust font sizes to ensure better pixelation */
+        h1 { font-size: 32px; }
+        h2 { font-size: 24px; }
+        h3, .project-title { font-size: 18px; }
+        p, .project-subtitle { font-size: 14px; }
+
+        body {
+            font-family: 'Connectionii', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('Tile1.png');
+            background-repeat: repeat;
+            background-size: 256px 256px;
+            image-rendering: pixelated;
+            color: #ffffff;
+            animation: backgroundChange .5s step-end infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            -webkit-font-smoothing: none;
+            -moz-osx-font-smoothing: none;
+            font-smooth: never;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 20px;
+            padding: 20px;
+            background-color: rgba(26, 26, 46);
+            border: 8px solid #ffffff;
+            text-align: center;
+        }
+        
+        .image-container {
+            position: relative;
+            width: 208px;
+            height: 208px;
+            margin-bottom: 10px;
+        }
+
+        .image-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 208px;
+            height: 208px;
+            background-image: url('ImageOutline.png');
+            background-size: cover;
+            z-index: 1;
+            image-rendering: pixelated;
+        }
+
+        .project-image, .profile-image {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            object-position: center;
+            z-index: 2;
+            margin: 4px;
+            image-rendering: auto;
+        }
+
+        .grid-item:hover .project-image {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        .grid-item:hover .project-image,
+        .about-container .image-container:hover .profile-image {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        .about-container {
+            display: flex;
+            align-items: flex-start;
+            text-align: left;
+            margin-bottom: 20px;
+            background-color: #16213e;
+            padding: 20px;
+            border: 4px solid #ffffff;
+        }
+
+        .about-container .image-container {
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .about-text {
+            flex: 1;
+            margin-left: 20px;
+        }
+        .header-image {
+            width: 100%;
+            max-width: 660px;
+            height: auto;
+            margin-bottom: 20px;
+            object-fit: cover;
+            image-rendering: pixelated;
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .grid-item {
+            background-color: #16213e;
+            padding: 20px;
+            cursor: pointer;
+            border: 4px solid #ffffff;
+        }
+        .project-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+        .project-subtitle {
+            font-size: 14px;
+            color: #a0a0a0;
+            margin: 0 0 10px;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: rgba(26, 26, 46);
+            border: 8px solid #ffffff;
+            padding: 20px;
+            max-width: 90%;
+            width: 900px;
+            max-height: 90%;
+            overflow-y: auto;
+            position: relative;
+            font-smooth: never; /* Disable font smoothing */
+            -webkit-font-smoothing: antialiased; /* For WebKit browsers */
+            -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
+            text-rendering: optimizeLegibility; /* Optimize text rendering */
+        }
+
+        .modal-content h2,
+        .modal-content h3,
+        .modal-content h4,
+        .modal-content p {
+            font-family: 'Connectionii', Arial, sans-serif; /* Ensure consistent font family */
+            letter-spacing: normal; /* Adjust letter-spacing if needed */
+            line-height: 1.4; /* Improve readability */
+            font-weight: normal; /* Adjust font weight for better clarity */
+        }
+
+        /* Ensure that text within modal is clear and sharp */
+        .modal-content p,
+        .modal-content h2,
+        .modal-content h3,
+        .modal-content h4 {
+            text-shadow: none; /* Remove any text shadow if it affects clarity */
+            font-weight: normal; /* Default weight for text */
+        }
+
+        .modal-content h2 {
+            font-weight: bold; /* Set font weight to bold */
+        }
+
+        .modal-content h3 {
+            font-weight: bold; /* Set font weight to bold */
+        }
+
+        .modal-content h4 {
+            font-weight: bold; /* Set font weight to bold */
+        }
+
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #ffffff;
+            cursor: pointer;
+            z-index: 1001; /* Make sure it appears above the modal content */
+        }
+
+        .modal-main-image-container {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .modal-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .modal-image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-image-item {
+            aspect-ratio: 1 / 1;
+        }
+
+        .modal-image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .modal-extra-container {
+            background-color: rgba(30, 30, 46, 0.9);
+            border: 4px solid #ffffff;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 5px;
+        }
+
+        .modal-extra-text {
+            font-family: 'Connectionii', Arial, sans-serif;
+            font-size: 14px;
+            color: #ffffff;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .grid-item {
+            cursor: pointer;
+        }
+
+        .modal-info-container {
+            background-color: rgba(30, 30, 46, 0.9);
+            border: 4px solid #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .modal-info-section {
+            margin-bottom: 15px;
+        }
+
+        .modal-info-section h4 {
+            font-size: 16px;
+            color: #ffffff;
+            margin-bottom: 5px;
+        }
+
+        .modal-info-section p {
+            font-size: 14px;
+            color: #e0e0e0;
+            line-height: 1.6;
+        }
+
+        #links-text a {
+            display: block;
+            color: #b471d8;
+            text-decoration: none;
+            margin-bottom: 5px;
+        }
+
+        #links-text a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <img src="WiktorKolakowskiHeader.png" alt="Wiktor Kolakowski" class="header-image">
+        </header>
+
+        <section class="section" id="about">
+            <h2>About Me</h2>
+            <div class="about-container">
+                <div class="image-container">
+                    <img src="Wiktor Headshot1.jpg" alt="Your Name" class="profile-image">
+                </div>
+                <div class="about-text">
+                    <p>*Raps about myself and my wide variety of epic skills and talents and how cool and funny everybodty thinks I am* (this is a placeholder image guys i promise)</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="experience">
+            <h2>Projects</h2>
+            <div class="grid">
+                <div class="grid-item" data-project="11">
+                    <div class="image-container">
+                        <img src="BalldyseusCover.png" alt="Project 10" class="project-image">
+                    </div>
+                    <h3 class="project-title">Balldyseus</h3>
+                    <p class="project-subtitle">2024 (WIP)</p>
+                    <p class="project-subtitle">Solo-Game</p>
+                </div>
+                <div class="grid-item" data-project="10">
+                    <div class="image-container">
+                        <img src="PickYourselfUpCover.png" alt="Project 10" class="project-image">
+                    </div>
+                    <h3 class="project-title">Pick Yourself Up</h3>
+                    <p class="project-subtitle">2024</p>
+                    <p class="project-subtitle">Mental-Health-Themed Game Jam</p>
+                </div>
+                <div class="grid-item" data-project="9">
+                    <div class="image-container">
+                        <img src="DecayAndWatchCover.png" alt="Project 9" class="project-image">
+                    </div>
+                    <h3 class="project-title">Decay & Watch</h3>
+                    <p class="project-subtitle">2024</p>
+                    <p class="project-subtitle">Discord's Decay-Themed Game Jam</p>
+                </div>
+                <div class="grid-item" data-project="8">
+                    <div class="image-container">
+                        <img src="AgainstTheTideCover.png" alt="Project 8" class="project-image">
+                    </div>
+                    <h3 class="project-title">Against The Tide! (Ft: Dr.Rap)</h3>
+                    <p class="project-subtitle">2024</p>
+                    <p class="project-subtitle">Water-Themed Game Jam</p>
+                </div>
+                <div class="grid-item" data-project="7">
+                    <div class="image-container">
+                        <img src="CornboyCover.png" alt="Project 7" class="project-image">
+                    </div>
+                    <h3 class="project-title">Cornboy</h3>
+                    <p class="project-subtitle">2024</p>
+                    <p class="project-subtitle">IndieCade's Climate Jam Internship</p>
+                </div>
+                <div class="grid-item" data-project="6">
+                    <div class="image-container">
+                        <img src="StrikingHellCover.png" alt="Project 6" class="project-image">
+                    </div>
+                    <h3 class="project-title">Striking Hell</h3>
+                    <p class="project-subtitle">2023 - 2024</p>
+                    <p class="project-subtitle">Studio Aspen</p>
+                </div>
+                <div class="grid-item" data-project="5">
+                    <div class="image-container">
+                        <img src="JokesOnYouCover.png" alt="Project 5" class="project-image">
+                    </div>
+                    <h3 class="project-title">Joke's On You!</h3>
+                    <p class="project-subtitle">2024</p>
+                    <p class="project-subtitle">Global Game Jam @ NYU Game Center</p>
+                </div>
+                <div class="grid-item" data-project="4">
+                    <div class="image-container">
+                        <img src="ChickChaseCover.png" alt="Project 4" class="project-image">
+                    </div>
+                    <h3 class="project-title">Chick Chase</h3>
+                    <p class="project-subtitle">2023</p>
+                    <p class="project-subtitle">Unthemed Game Jam</p>
+                </div>
+                <div class="grid-item" data-project="3">
+                    <div class="image-container">
+                        <img src="OpossumOpsCover.png" alt="Project 3" class="project-image">
+                    </div>
+                    <h3 class="project-title">Opossum Ops</h3>
+                    <p class="project-subtitle">2023</p>
+                    <p class="project-subtitle">Unthemed Game Jam</p>
+                </div>
+                <div class="grid-item" data-project="2">
+                    <div class="image-container">
+                        <img src="SlingBeeCover.png" alt="Project 2" class="project-image">
+                    </div>
+                    <h3 class="project-title">Sling Bee</h3>
+                    <p class="project-subtitle">2023</p>
+                    <p class="project-subtitle">EGD x SGDA's 2-Day Game Jam</p>
+                </div>
+                <div class="grid-item" data-project="1">
+                    <div class="image-container">
+                        <img src="RefoldCover.png" alt="Project 1" class="project-image">
+                    </div>
+                    <h3 class="project-title">Refold</h3>
+                    <p class="project-subtitle">2023</p>
+                    <p class="project-subtitle">EGD's EXP Program</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="education">
+            <h2>Experience/Education</h2>
+            <div class="grid">
+                <div class="grid-item">
+                    <div class="image-container">
+                        <img src="placeholder.jpg" alt="Education 1" class="project-image">
+                    </div>
+                    <h3 class="project-title">PLACEHOLDER!!!</h3>
+                    <p class="project-subtitle">PLACEHOLDER!!!</p>
+                </div>
+                <div class="grid-item">
+                    <div class="image-container">
+                        <img src="placeholder.jpg" alt="Education 2" class="project-image">
+                    </div>
+                    <h3 class="project-title">PLACEHOLDER!!!</h3>
+                    <p class="project-subtitle">PLACEHOLDER!!!</p>
+                </div>
+                <div class="grid-item">
+                    <div class="image-container">
+                        <img src="placeholder.jpg" alt="Education 3" class="project-image">
+                    </div>
+                    <h3 class="project-title">PLACEHOLDER!!!</h3>
+                    <p class="project-subtitle">PLACEHOLDER!!!</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="links">
+            <h2>Links</h2>
+            <p>*Raps About My LinkedIn, Resume, itch.io, Email and whatever other links*</p>
+        </section>
+
+        <div class="modal-overlay" id="modal-overlay">
+            <div class="modal-content">
+                <span class="close-modal">&times;</span>
+                <div id="modal-project-content">
+                    <!-- New container added for description, challenges, outcome, and links -->
+                    <div class="modal-info-container">
+                        <div class="modal-info-section" id="description-section">
+                            <h4>Description:</h4>
+                            <p id="description-text"></p>
+                        </div>
+                        <div class="modal-info-section" id="challenges-section">
+                            <h4>Challenges:</h4>
+                            <p id="challenges-text"></p>
+                        </div>
+                        <div class="modal-info-section" id="outcome-section">
+                            <h4>Outcome:</h4>
+                            <p id="outcome-text"></p>
+                        </div>
+                        <div class="modal-info-section" id="links-section">
+                            <h4>Links:</h4>
+                            <div id="links-text"></div>
+                        </div>
+                    </div>
+                    <!-- Additional container for extra content -->
+                    <div class="modal-extra-container">
+                        <div class="modal-extra-text">
+                            <!-- Content for the new container -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+<script>
+        // Updated project details object
+    const projectDetails = {
+        1: {
+            title: "Refold",
+            subtitle: "Game Designer/Sound Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "RefoldCover.png",
+            images: ["RefoldImageOne.png", "RefoldImageTwo.png", "RefoldImageThree.png"],
+            links: [
+                { text: "Play Here!", url: "https://github.com/yourusername/project1" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        2: {
+            title: "Sling Bee",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        3: {
+            title: "Opossum Ops",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        4: {
+            title: "Chick Chase",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        5: {
+            title: "Joke's On You",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        6: {
+            title: "Striking Hell",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        7: {
+            title: "Cornboy",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        8: {
+            title: "Against The Tide! (Ft: Dr. Rap!)",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        9: {
+            title: "Decay & Watch",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        10: {
+            title: "Pick Yourself Up!",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        11: {
+            title: "Balldyseus",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "SlingBeeCover.png",
+            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            links: [
+                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+
+        // Add more projects as needed
+    };
+
+    const gridItems = document.querySelectorAll('.grid-item');
+    const modalOverlay = document.getElementById('modal-overlay');
+    const modalContent = document.getElementById('modal-project-content');
+    const closeModal = document.querySelector('.close-modal');
+
+    // Function to open modal
+    const openModal = (projectId) => {
+        const project = projectDetails[projectId];
+        if (project) {
+            modalContent.innerHTML = `
+                <div class="modal-main-image-container">
+                    <img src="${project.mainImage}" alt="${project.title}" class="modal-main-image">
+                </div>
+                <h2>${project.title}</h2>
+                <h3>${project.subtitle}</h3>
+                <div class="modal-info-container">
+                    <div class="modal-info-section" id="description-section">
+                        <h4>Description:</h4>
+                        <p id="description-text">${project.description}</p>
+                    </div>
+                    <div class="modal-info-section" id="challenges-section">
+                        <h4>Challenges:</h4>
+                        <p id="challenges-text">${project.challenges}</p>
+                    </div>
+                    <div class="modal-info-section" id="outcome-section">
+                        <h4>Outcome:</h4>
+                        <p id="outcome-text">${project.outcome}</p>
+                    </div>
+                    <div class="modal-info-section" id="links-section">
+                        <h4>Links:</h4>
+                        <div id="links-text">
+                            ${project.links.map(link => `
+                                <a href="${link.url}" target="_blank" rel="noopener noreferrer">${link.text}</a>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-image-grid">
+                    ${project.images.map(img => `
+                        <div class="modal-image-item">
+                            <img src="${img}" alt="Project image" onclick="updateMainImage(this.src)">
+                        </div>
+                    `).join('')}
+                </div>
+                <div class="modal-extra-container">
+                    <div class="modal-extra-text">
+                        ${project.extraContent}
+                    </div>
+                </div>
+            `;
+            modalOverlay.style.display = 'flex';
+        }
+    };
+
+    // Add click event listener to each grid item
+    gridItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const projectId = item.getAttribute('data-project');
+            openModal(projectId);
+        });
+    });
+
+    // Close modal when clicking on the close button
+    closeModal.addEventListener('click', () => {
+        modalOverlay.style.display = 'none';
+    });
+
+    // Close modal when clicking outside the modal content
+    modalOverlay.addEventListener('click', (event) => {
+        if (event.target === modalOverlay) {
+            modalOverlay.style.display = 'none';
+        }
+    });
+    </script>
+    </div>
+</body>
+</html>
