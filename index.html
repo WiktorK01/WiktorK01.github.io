@@ -235,38 +235,6 @@
             z-index: 1001; /* Make sure it appears above the modal content */
         }
 
-        .modal-main-image-container {
-            width: 100%;
-            height: 300px;
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-
-        .modal-main-image {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .modal-image-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-top: 20px;
-        }
-
-        .modal-image-item {
-            aspect-ratio: 1 / 1;
-        }
-
-        .modal-image-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-
         .modal-extra-container {
             background-color: rgba(30, 30, 46, 0.9);
             border: 4px solid #ffffff;
@@ -321,6 +289,94 @@
         #links-text a:hover {
             text-decoration: underline;
         }
+        
+        .modal-image-item img:hover {
+            animation: shake 0.5s;
+            animation-iteration-count: infinite;
+        }
+
+        .modal-image-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+
+        .modal-image-item {
+            aspect-ratio: 1 / 1;
+            overflow: hidden;
+        }
+
+        .modal-image-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            image-rendering: high-quality;
+        }
+
+        .modal-main-image-container {
+            width: 100%;
+            height: 300px;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+
+        .modal-main-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            image-rendering: high-quality;
+            cursor: pointer;
+        }
+
+        .lazy-load {
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .lazy-load.loaded {
+            opacity: 1;
+        }
+
+        .enlarged-image-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .enlarged-image-container {
+            position: relative;
+            max-width: 90%;
+            max-height: 90%;
+            background-color: rgba(26, 26, 46);
+            border: 8px solid #ffffff;
+            padding: 20px;
+        }
+
+        .enlarged-image {
+            max-width: 100%;
+            max-height: calc(90vh - 40px);
+            object-fit: contain;
+        }
+
+        .close-enlarged-image {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            color: #ffffff;
+            cursor: pointer;
+            z-index: 2001;
+        }
     </style>
 </head>
 <body>
@@ -352,14 +408,6 @@
                     <p class="project-subtitle">2024 (WIP)</p>
                     <p class="project-subtitle">Solo-Game</p>
                 </div>
-                <div class="grid-item" data-project="10">
-                    <div class="image-container">
-                        <img src="PickYourselfUpCover.png" alt="Project 10" class="project-image">
-                    </div>
-                    <h3 class="project-title">Pick Yourself Up</h3>
-                    <p class="project-subtitle">2024</p>
-                    <p class="project-subtitle">Mental-Health-Themed Game Jam</p>
-                </div>
                 <div class="grid-item" data-project="9">
                     <div class="image-container">
                         <img src="DecayAndWatchCover.png" alt="Project 9" class="project-image">
@@ -367,6 +415,14 @@
                     <h3 class="project-title">Decay & Watch</h3>
                     <p class="project-subtitle">2024</p>
                     <p class="project-subtitle">Discord's Decay-Themed Game Jam</p>
+                </div>
+                <div class="grid-item" data-project="10">
+                    <div class="image-container">
+                        <img src="PickYourselfUpCover.png" alt="Project 10" class="project-image">
+                    </div>
+                    <h3 class="project-title">Pick Yourself Up</h3>
+                    <p class="project-subtitle">2024</p>
+                    <p class="project-subtitle">Mental-Health-Themed Game Jam</p>
                 </div>
                 <div class="grid-item" data-project="8">
                     <div class="image-container">
@@ -422,7 +478,7 @@
                     </div>
                     <h3 class="project-title">Sling Bee</h3>
                     <p class="project-subtitle">2023</p>
-                    <p class="project-subtitle">EGD x SGDA's 2-Day Game Jam</p>
+                    <p class="project-subtitle">Bee-themed Game Jam</p>
                 </div>
                 <div class="grid-item" data-project="1">
                     <div class="image-container">
@@ -438,26 +494,29 @@
         <section class="section" id="education">
             <h2>Experience/Education</h2>
             <div class="grid">
-                <div class="grid-item">
+                <div class="grid-item" data-project="12">
                     <div class="image-container">
-                        <img src="placeholder.jpg" alt="Education 1" class="project-image">
+                        <img src="MDG.png" alt="Education 1" class="project-image">
                     </div>
-                    <h3 class="project-title">PLACEHOLDER!!!</h3>
-                    <p class="project-subtitle">PLACEHOLDER!!!</p>
+                    <h3 class="project-title">Most Dangerous Games</h3>
+                    <p class="project-subtitle">Summer 2024</p>
+                    <p class="project-subtitle">Programming Intern</p>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" data-project="13">
                     <div class="image-container">
-                        <img src="placeholder.jpg" alt="Education 2" class="project-image">
+                        <img src="EGD.png" alt="Education 2" class="project-image">
                     </div>
-                    <h3 class="project-title">PLACEHOLDER!!!</h3>
-                    <p class="project-subtitle">PLACEHOLDER!!!</p>
+                    <h3 class="project-title">EGD Collective</h3>
+                    <p class="project-subtitle">2022 - ????</p>
+                    <p class="project-subtitle">Games Studio Program</p>
                 </div>
-                <div class="grid-item">
+                <div class="grid-item" data-project="14">
                     <div class="image-container">
-                        <img src="placeholder.jpg" alt="Education 3" class="project-image">
+                        <img src="CUNY.png" alt="Education 3" class="project-image">
                     </div>
-                    <h3 class="project-title">PLACEHOLDER!!!</h3>
-                    <p class="project-subtitle">PLACEHOLDER!!!</p>
+                    <h3 class="project-title">Education</h3>
+                    <p class="project-subtitle">CUNY BA '2026</p>
+                    <p class="project-subtitle">Game Programming & Design</p>
                 </div>
             </div>
         </section>
@@ -471,7 +530,6 @@
             <div class="modal-content">
                 <span class="close-modal">&times;</span>
                 <div id="modal-project-content">
-                    <!-- New container added for description, challenges, outcome, and links -->
                     <div class="modal-info-container">
                         <div class="modal-info-section" id="description-section">
                             <h4>Description:</h4>
@@ -490,13 +548,17 @@
                             <div id="links-text"></div>
                         </div>
                     </div>
-                    <!-- Additional container for extra content -->
                     <div class="modal-extra-container">
                         <div class="modal-extra-text">
-                            <!-- Content for the new container -->
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        <div class="enlarged-image-overlay" id="enlarged-image-overlay">
+            <div class="enlarged-image-container">
+                <span class="close-enlarged-image">&times;</span>
+                <img src="" alt="Enlarged project image" class="enlarged-image" id="enlarged-image">
             </div>
         </div>
     
@@ -506,130 +568,229 @@
         1: {
             title: "Refold",
             subtitle: "Game Designer/Sound Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
+            description: "A 2D platformer where you control a crumpled ball of paper that can transform into different origami shapes, each with different abilities!",
+            challenges: `
+            <p>This was made as part of EGD's Exploration Program with a small team of me and three others. We were prepared to work together on a larger project after becoming comfortable with each other with a few tinier games for the first semester.</p>
+
+            <p>I've often enjoyed crafting paper cranes to keep my hands busy. I picked this back up early into my second semester and suggested the idea to my team: a game in which the player controls a crumpled paper ball that can shift into origami shapes, each with different properties.</p>
+
+            <p>We ran with the idea, making it a simple platformer made in GameMaker with art themed around stationery. I recall we spent a good amount of time trying to contextualize the narrative for the game and making that work, though we eventually realized that for a game like this, it didn't really matter. When people think of origami, they think of playful arts and crafts, so we themed everything around just that and kept the narrative to a minimum.</p>
+
+            <p>I was in charge of handling the level design & audio. The SFX was simple and fun to make; I crumpled some paper and tore it next to my mic for all those sounds. Music took a bit longer; I had never composed a song before, so taking what I learned in Music Theory 101 and putting it into practice was a bit daunting, but I'm happy with how the track turned out.</p>
+
+            <p>In terms of Level Design, I quickly learned how difficult it is to create a tutorial level. Earlier iterations were way too hard and challenged playtesters too much when we presented them at CCNY's Unreleased Games Arcade. Eventually, I managed to get the tutorial to a point where I liked it, and while the latter half of the game was far less polished, I was content with my output.</p>
+            `,
+            outcome: `
+            <p>We presented Refold at Waffle Games 6.0. While I was happy with how it turned out, I was still shocked at how positively people reacted when they played the game. While I initially wondered why people were getting excited over a simple platformer with a slight twist, I eventually realized that the theme's cohesion is what really sold the experience. Mechanically, the game is nothing crazy, but the cute origami/stationery theming meshed with it well.</p>
+
+            <p>The game ended up winning EGD's "Best Overall GSP Game" for that school year and is now regularly shown at EGD and Urban Arts tabling events as an example of what students can make. Had I known it would still be shown to this day, I would've done much more polish on the level design, but at least now I try to value that polish far more.</p>
+            `,
             mainImage: "RefoldCover.png",
-            images: ["RefoldImageOne.png", "RefoldImageTwo.png", "RefoldImageThree.png"],
+            images: ["RefoldImageOne.png", "RefoldImageTwo.png", "RefoldImageThree.png", "RefoldLevel.jpg"],
             links: [
-                { text: "Play Here!", url: "https://github.com/yourusername/project1" },
+                { text: "Play Here!", url: "https://studiosleepwalk.itch.io/refold" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "<b>Fun Fact:</b> For the music track, I accidentally plagiarized part of the melody from The Avalanche's \"The Divine Chord,\" which was shockingly unintentional. I heard it months later after not hearing it for a while and was like, \"Oh, that's where I got that from.\""
         },
         2: {
             title: "Sling Bee",
             subtitle: "Game Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
+            description: `
+                <p>A high score based game where you sling your bee from flower to flower to try and keep them all pollinated!</p>
+            `,
+            challenges: `
+                <p>This game was developed by me and six others as part of a two-day game jam in partnership with EGD and SGDA, with the theme "Bees!"</p>
+
+                <p>We had the evening to meet and plan our idea, with a full Saturday to get it done. During our evening meeting, we brainstormed ideas, and I explained my vision for the high-score game we ended with, using a poorly drawn MS-Paint image to convey my idea. The game itself was mainly inspired by the Sling Pods from Super Mario Galaxy. The team liked the plan, and I got to work making a game design summary and a task list for every team member to complete during that Saturday.</p>
+
+                <p>Unfortunately, the game jam was announced after I was already scheduled to work on the day of the jam, so I couldn't help much in creating the game. However, I was still regularly checking in and offering design advice when needed. By the time I got home, my team had pulled through, and we had a fully finished project!</p>
+            `,
+            outcome: `
+                <p>Given our time constraints, my team and I were happy with how the project turned out! This was one of my first real game jams, and it was a very cool experience to have something be an idea one evening and a playable game the next.</p>
+
+                <p>We received quite favorable reviews for the jam, placing fifth in Gameplay, fourth Overall, second in Audio, and first in Usability/Accessibility!</p>
+            `,
             mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            images: ["SlingBeeTwo.png", "SlingBeeThree.png", "SlingBeeConcept.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://thestreet.itch.io/be-a-bee" },
             ],
             extraContent: "*Fun Fact added here!*"
         },
         3: {
             title: "Opossum Ops",
-            subtitle: "Game Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            subtitle: "Game Programmer/Designer",
+            description: `
+                <p>You're an Opossum who has just escaped its cage in a pet store! Collect food pellets and avoid detection from the spotlights to make your escape!</p>
+            `,
+            challenges: `
+                <p>I and six others made this in EGD for a two-week unthemed game jam. This was my first ever experience as a sole programmer for a project, so it was interesting to get my bearings with Unity. Shortly before this, I started to ideate the basis of a solo game I wanted to make, "Balldyseus." I expressed my curiosity about that movement mechanic, and we decided to "roll" with it!</p>
+
+                <p>Since this year's Aspen game was in 3D, we thought it'd be best to pursue that for this game. We had some animal assets on hand, so we decided to theme the game around escaping a pet store in a hamster ball while collecting food pellets. However, we didn't have any hamster models, so we used an Opossum instead!</p>
+
+                <p>Programming went fairly smoothly. After the basic movement and pellet collection were done, the main challenge was figuring out how to cut out unique shapes for the level design in the game. Afterward, the designers and I built the level, decorated it, added our Title Screen and Game-Over screen, and we had a finished product.</p>
+            `,
+            outcome: `
+                <p>For a 2-week jam as my first real programming experience, while we were all juggling school, I think the game turned out quite well. The movement was awkward; a game like this probably would have benefitted from a trackball, which was obviously not achievable for a web-based game like this. Past that, we should have found some actual models for the food pellets since it's unclear what the squares you're collecting are, and generally, we could have added far more polish and feedback. But past that, I'm happy with the outcome.</p>
+            `,
+            mainImage: "OpossumOpsCover.png",
+            images: ["OpossumOpsOne.png", "OpossumOpsTwo.png", "OpossumOpsThree.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://wiktork01.itch.io/opossum-ops" },
             ],
             extraContent: "*Fun Fact added here!*"
         },
         4: {
             title: "Chick Chase",
-            subtitle: "Game Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            subtitle: "Game Designer/Programmer",
+            description: `
+                <p>A high-score game where you have to launch yourself to catch as many chickens as you can!</p>
+            `,
+            challenges: `
+                <p>I and three others made this in EGD for an unthemed game jam. To further test the movement mechanics I was aiming to achieve for "Balldyseus," I decided to reuse the concept found in Opossum Ops and attempt to refine it for a 2D space.</p>
+
+                <p>Initially, this was meant to actually be Balldyseus, but due to time constraints and a realization we could not create the systems we needed for that game in a month, we scaled the game back massively in the last week and made it smaller high-score based game themed around catching chickens before they escaped.</p>
+            `,
+            outcome: `
+                <p>Although it was initially moreso a test for me, every team member really pulled through with their part and we ended up with a very cute and cohesive gamejam! Of course there's definitely things I would change about this now, particularly in terms of the UI and feedback, but I'm proud of how this turned out!</p>
+            `,
+            mainImage: "ChickChaseCover.png",
+            images: ["ChickChaseOne.png", "ChickChaseTwo.png", "ChickChaseThree.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://wiktork01.itch.io/chick-chase" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact added here!"
         },
         5: {
             title: "Joke's On You",
-            subtitle: "Game Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            subtitle: "Lead Programmer/Game Designer",
+            description: `
+                <p><strong>Winner of the "Best Use of Theme" Award for Global Game Jam at the NYU Game Center!</strong></p>
+                <p>The King's financial committee has declared that, due to budget-cuts, only one Jester will be able to keep their job! As such, each Jester will take turns doing an Impromptu Performance for the King!</p>
+            `,
+            challenges: `
+                <p>This was one of my first in-person jams! I worked with four others whom I knew from EGD. We attended the opening ceremony on Friday evening and got to brainstorming the overall concept.</p>
+
+                <p>Since I was the lead programmer and still not fully comfortable with Unity, I thought it'd be best to have a game that leaned more into real-life interaction with others rather than being heavy on the game-mechanics, something akin to a Jackbox party game. With the theme being "Make Me Laugh", we decided to take this as literally as possible. One player is the king, the rest are jesters who must take turns "making them laugh," whoever does that the best wins! With the twist being that while doing their "performance", the King can at any time press X, Y, or B on their controller to spawn a person, place, or thing that the jester must incorporate into their game.</p>
+
+                <p>That night, I stayed up until 4AM outlining the overall code-design for the game for our other programmer. Given how late it was and my inexperience, some of the ideas were less than ideal, but I attached the sheet regardless.</p>
+
+                <p>The next day was pure work, I arrived at the center and got the main systems down. Artists made art, musicians made music. I spent that full night working on the game nonstop, which marks my first time pulling an all-nighter for a project! That Sunday, We wrapped up the game & submitted it!</p>
+            `,
+            outcome: `
+                <p>For the rest of the Sunday, we presented our game alongside all the others. People responded extremely positively to the concept! Many had a lot of fun playing with their friends and making each other laugh, with many playing multiple rounds in a row!</p>
+
+                <p>When the time came for the awards, we weren't exactly expecting anything since our game was relatively unpolished compared to many others in the jam, but we ended up winning the "Best Use of Theme" award! We were super ecstatic about that!</p>
+            `,
+            mainImage: "JokesOnYouCover.png",
+            images: ["JokesOnYouOne.png", "JokesOnYouTwo.png", "JokesOnYouThree.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://wiktork01.itch.io/jokes-on-you" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact added here!"
         },
         6: {
             title: "Striking Hell",
-            subtitle: "Game Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            subtitle: "Junior Designer/Audio Programmer",
+            description: `
+                <p>A 3D retrowave platformer where you must use your sentient sword to fight back against Hell's oppressors and liberate it!</p>
+            `,
+            challenges: `
+                <p>This was made during the 2024-2025 school year by EGD's Studio Aspen, a mock-AAA studio where roughly fifty of the program's students must work together to make a game over the course of the school year. The program is split up into Design, Programming, Art, and Audio teams, each with their own leads, and an Executive Producer at the helm.</p>
+
+                <p>I was part of the design and programming teams, acting as a junior designer and the sole audio programmer. I assisted in the ideation of several of the core game mechanics, helped ideate some of the enemy types, helped create the audio manager and all its implementations, and I created a few of the game mechanics, primarily involving the game's rotating slash wall.</p>
+            `,
+            outcome: `
+                <p>Due to a variety of reasons, the game did not come anywhere near what we were hoping for. The game's scope was simply too large for the students, and we did not get enough iterative loops or playtesting in to address simple game design issues that caused developers to waste their time (such as our needless focus on combat and enemy creation, when the most fun part of the game was the platforming).</p>
+
+                <p>Despite the turnout of the project, the most important thing was that all the students learned what it's like working in a massive team like this, so at least that aspect of the game was a success!</p>
+            `,
+            mainImage: "StrikingHellCover.png",
+            images: ["StrikingHellOne.png", "StrikingHellTwo.png", "StrikingHellThree.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://thestreet.itch.io/striking-hell-test" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact added here!"
         },
         7: {
             title: "Cornboy",
-            subtitle: "Game Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            subtitle: "Lead Game Designer/Developer/Artist",
+            description: `
+                <p>You play as Cornboy on his quest to destroy a forest so he can grow cash crops and make a profit! Though the environment is not going to give up without a fight! Dodge attacks and plant your corn seeds to take over this land!</p>
+            `,
+            challenges: `
+                <p>The development went relatively smoothly. I knew I wanted to theme the game about taking over the land with corn with some over-the-top, tongue-in-cheek tone. With this I knew I wanted some kind of area control mechanic, so I decided to take a .io game I played long ago called Paper.io, and convert its core mechanic to a bullet hell type game.</p>
+
+                <p>I got my friend Kaya to join the jam, he's been interested in starting game development and thought this would be a good opportunity for him to get started with Unity. He ideated the attacks & handled the foundation for the game, creating the player with health & movement along with the basis for attacks that can damage and kill the player, as well as implementing UI & the pause menu + title screen.</p>
+
+                <p>Once we had the foundation, I moved into the main developer seat to handle the harder tasks, particularly the attack-patterns and the cornfield mechanic. The paper.io-like cornfield creation was a challenge to implement, and after finally getting it to work, we realized it's not all too fun in a bullet-hell setting, so we chose to scrap the whole thing and change the game so that cornboy draws the cornfields like a paint brush.</p>
+
+                <p>I created all the art, which was a fun and interesting experience as I had never taken on a leading art role in a project up until this point. Kaya handled the audio, I added a lot of juice into the UI and interactions using the FEEL Unity asset as a huge aid, and we had a pretty polished game by the end of it!</p>
+            `,
+            outcome: `
+                <p>Via group vote amongst participants in the production sprint, with 48 entries, the game managed to hit the top-10 amongst all but one category, "Use of Theme." Notably reaching #2 for gameplay and #7 overall.</p>
+
+                <p>I'm very happy with the outcome, it may be a smaller game compared to others in the jam, but it felt great to have something that I was in complete control of, and able to show and prove to myself that I can see a creative vision through to its end.</p>
+            `,
+            mainImage: "CornboyCover.png",
+            images: ["CornboyOne.png", "CornboyTwo.png", "CornboyThree.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://wiktork01.itch.io/cornboy" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact:"
         },
         8: {
             title: "Against The Tide! (Ft: Dr. Rap!)",
-            subtitle: "Game Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            subtitle: "Creative Lead/Game Designer",
+            description: `
+                <p>Experience the epic rap battle between the famous Dr. Rap against water! (like, the concept of water itself!)</p>
+            `,
+            challenges: `
+                <p>This one was… interesting. Definitely more of a "comedic experience" than a game. After completing Cornboy, I was set to join this 2-day water-themed game jam with a small team for the EGD Summer Program. I was tired of unity development from my previous jam and wanted to make something simple, but still entertaining, polished, and visually interesting.</p>
+
+                <p>While commuting there, I was struck with a flash of inspiration. "What if it was a rap battle, AGAINST THE VERY CONCEPT OF WATER!!!" Perhaps the success of Cornboy had inflated my hubris, I no longer held the bearings of whether I *should* see my vision completed, but only if i *could.*</p>
+
+                <p>I pitched the idea to my team, we all found it funny, and we got to work. Since the secondary theme was "healing", we added a doctor to our game. "Dr. Rap"! Our sound designer Zahir volunteered to be Dr. Rap, so we took pictures of him and pixelated him to a Mortal Kombat-esque visual style. Our whole visual style was mis-mashed and not cohesive, but strangely that seemed to work for how ridiculous our game was.</p>
+
+                <p>Gameplaywise, we purposely wanted there to be no real strategy. The player must pick a vague option on what they want to rap about and they have no clue which one is correct or incorrect. In a normal game this level of randomness and uncertainty for the player would not be acceptable, but since the winning or losing isn't a particularly important part of the experience, I don't think it matters much here.</p>
+            `,
+            outcome: `
+                <p>"What have I just played?",  "off the rails",  "LMAO"</p>
+
+                <p>These were all comment sentiments from the comments of the Jam submission, which is precisely what I was hoping for. The game was weird, random, and certainly wasn't winning any gameplay awards, but it was what I wanted it to be, a comedic, entertaining experience.</p>
+
+                <p>In the ratings, out of 84 entries, the game managed to reach #11 in Enjoyment and #29 Overall.</p>
+            `,
+            mainImage: "AgainstTheTideCover.png",
+            images: ["AgainstTheTideOne.png", "AgainstTheTideTwo.png", "AgainstTheTideThree.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://wiktork01.itch.io/against-the-tide" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact added here!"
         },
         9: {
-            title: "Decay & Watch",
-            subtitle: "Game Designer",
-            description: "*Raps about the game*",
-            challenges: "*Raps about my experience working on the game*",
-            outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
-            links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
-            ],
-            extraContent: "*Fun Fact added here!*"
-        },
-        10: {
             title: "Pick Yourself Up!",
             subtitle: "Game Designer",
             description: "*Raps about the game*",
             challenges: "*Raps about my experience working on the game*",
             outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            mainImage: "PickYourselfUpCover.png",
+            images: ["PickYourselfUpOne.png", "PickYourselfUpTwo.png", "PickYourselfUpThree.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://wiktork01.itch.io/pick-yourself-up" },
+            ],
+            extraContent: "*Fun Fact added here!*"
+        },
+        10: {
+            title: "Decay & Watch",
+            subtitle: "Game Designer",
+            description: "*Raps about the game*",
+            challenges: "*Raps about my experience working on the game*",
+            outcome: "*Raps about how the game ended up*",
+            mainImage: "DecayAndWatchCover.png",
+            images: ["DecayAndWatchOne.png", "DecayAndWatchTwo.png", "DecayAndWatchThree.png"],
+            links: [
+                { text: "Play Here!", url: "https://wiktork01.itch.io/decayandwatch" },
             ],
             extraContent: "*Fun Fact added here!*"
         },
@@ -639,29 +800,66 @@
             description: "*Raps about the game*",
             challenges: "*Raps about my experience working on the game*",
             outcome: "*Raps about how the game ended up*",
-            mainImage: "SlingBeeCover.png",
-            images: ["SlingBeeOne.png", "SlingBeeTwo.png"],
+            mainImage: "BalldyseusCover.png",
+            images: ["BalldyseusOne.png", "BalldyseusTwo.png", "BalldyseusThree.png"],
             links: [
-                { text: "Play Here!", url: "https://yourportfolio.com/case-study-project2" },
+                { text: "Play Here!", url: "https://wiktork01.itch.io/balldyseus" },
             ],
             extraContent: "*Fun Fact added here!*"
         },
-
-        // Add more projects as needed
+        12: {
+                title: "Most Dangerous Games",
+                subtitle: "Programming Intern",
+                description: "*Raps about this education/experience*",
+                challenges: "*Raps about challenges faced during this period*",
+                outcome: "*Raps about the outcomes and skills gained*",
+                mainImage: "MDGLong.png",
+                images: ["placeholder.jpg", "placeholder.jpg", "placeholder.jpg"],
+                links: [
+                    { text: "More Info", url: "#" },
+                ],
+                extraContent: "*Fun Fact about this education/experience*"
+            },
+        13: {
+            title: "EGD Collective",
+            subtitle: "Games Studio Program Fellow",
+            description: "*Raps about this education/experience*",
+            challenges: "*Raps about challenges faced during this period*",
+            outcome: "*Raps about the outcomes and skills gained*",
+            mainImage: "EGD.png",
+            images: ["placeholder.jpg", "placeholder.jpg", "placeholder.jpg"],
+            links: [
+                { text: "More Info", url: "#" },
+            ],
+            extraContent: "*Fun Fact about this education/experience*"
+        },
+        14: {
+            title: "Game Programming & Design '2026",
+            subtitle: "CUNY BA",
+            description: "*Raps about this education/experience*",
+            challenges: "*Raps about challenges faced during this period*",
+            outcome: "*Raps about the outcomes and skills gained*",
+            mainImage: "CUNY.png",
+            images: ["placeholder.jpg", "placeholder.jpg", "placeholder.jpg"],
+            links: [
+                { text: "More Info", url: "#" },
+            ],
+            extraContent: "*Fun Fact about this education/experience*"
+        }
     };
+
 
     const gridItems = document.querySelectorAll('.grid-item');
     const modalOverlay = document.getElementById('modal-overlay');
     const modalContent = document.getElementById('modal-project-content');
     const closeModal = document.querySelector('.close-modal');
 
-    // Function to open modal
     const openModal = (projectId) => {
         const project = projectDetails[projectId];
         if (project) {
             modalContent.innerHTML = `
                 <div class="modal-main-image-container">
-                    <img src="${project.mainImage}" alt="${project.title}" class="modal-main-image">
+                    <img src="placeholder.jpg" data-src="${project.mainImage}" alt="${project.title}" class="modal-main-image lazy-load">
                 </div>
                 <h2>${project.title}</h2>
                 <h3>${project.subtitle}</h3>
@@ -690,7 +888,7 @@
                 <div class="modal-image-grid">
                     ${project.images.map(img => `
                         <div class="modal-image-item">
-                            <img src="${img}" alt="Project image" onclick="updateMainImage(this.src)">
+                            <img src="placeholder.jpg" data-src="${img}" alt="Project image" class="lazy-load" onclick="enlargeImage(this.dataset.src)">
                         </div>
                     `).join('')}
                 </div>
@@ -701,10 +899,10 @@
                 </div>
             `;
             modalOverlay.style.display = 'flex';
+            lazyLoadImages();
         }
     };
 
-    // Add click event listener to each grid item
     gridItems.forEach(item => {
         item.addEventListener('click', () => {
             const projectId = item.getAttribute('data-project');
@@ -712,17 +910,53 @@
         });
     });
 
-    // Close modal when clicking on the close button
     closeModal.addEventListener('click', () => {
         modalOverlay.style.display = 'none';
     });
 
-    // Close modal when clicking outside the modal content
     modalOverlay.addEventListener('click', (event) => {
         if (event.target === modalOverlay) {
             modalOverlay.style.display = 'none';
         }
     });
+
+    function enlargeImage(src) {
+        const enlargedImageOverlay = document.getElementById('enlarged-image-overlay');
+        const enlargedImage = document.getElementById('enlarged-image');
+        enlargedImage.src = src;
+        enlargedImageOverlay.style.display = 'flex';
+    }
+
+    const closeEnlargedImage = document.querySelector('.close-enlarged-image');
+    const enlargedImageOverlay = document.getElementById('enlarged-image-overlay');
+
+    closeEnlargedImage.addEventListener('click', () => {
+            enlargedImageOverlay.style.display = 'none';
+        });
+
+    enlargedImageOverlay.addEventListener('click', (event) => {
+        if (event.target === enlargedImageOverlay) {
+            enlargedImageOverlay.style.display = 'none';
+        }
+    });
+
+    function lazyLoadImages() {
+            const images = document.querySelectorAll('.lazy-load');
+            images.forEach(img => {
+                if (img.dataset.src) {
+                    img.src = img.dataset.src;
+                }
+                img.onload = () => {
+                    img.classList.add('loaded');
+                }
+            });
+        }
+
+    // Function to update main image
+    function updateMainImage(src) {
+        const mainImage = document.querySelector('.modal-main-image');
+        mainImage.src = src;
+    }
     </script>
     </div>
 </body>
