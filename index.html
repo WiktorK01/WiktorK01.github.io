@@ -187,41 +187,41 @@
             max-height: 90%;
             overflow-y: auto;
             position: relative;
-            font-smooth: never; /* Disable font smoothing */
-            -webkit-font-smoothing: antialiased; /* For WebKit browsers */
-            -moz-osx-font-smoothing: grayscale; /* For Firefox on macOS */
-            text-rendering: optimizeLegibility; /* Optimize text rendering */
+            font-smooth: never; 
+            -webkit-font-smoothing: antialiased; 
+            -moz-osx-font-smoothing: grayscale;
+            text-rendering: optimizeLegibility; 
         }
 
         .modal-content h2,
         .modal-content h3,
         .modal-content h4,
         .modal-content p {
-            font-family: 'Connectionii', Arial, sans-serif; /* Ensure consistent font family */
-            letter-spacing: normal; /* Adjust letter-spacing if needed */
-            line-height: 1.4; /* Improve readability */
-            font-weight: normal; /* Adjust font weight for better clarity */
+            font-family: 'Connectionii', Arial, sans-serif; 
+            letter-spacing: normal; 
+            line-height: 1.4; 
+            font-weight: normal; 
         }
 
-        /* Ensure that text within modal is clear and sharp */
+
         .modal-content p,
         .modal-content h2,
         .modal-content h3,
         .modal-content h4 {
-            text-shadow: none; /* Remove any text shadow if it affects clarity */
-            font-weight: normal; /* Default weight for text */
+            text-shadow: none; 
+            font-weight: normal;
         }
 
         .modal-content h2 {
-            font-weight: bold; /* Set font weight to bold */
+            font-weight: bold;
         }
 
         .modal-content h3 {
-            font-weight: bold; /* Set font weight to bold */
+            font-weight: bold;
         }
 
         .modal-content h4 {
-            font-weight: bold; /* Set font weight to bold */
+            font-weight: bold; 
         }
 
 
@@ -232,7 +232,7 @@
             font-size: 24px;
             color: #ffffff;
             cursor: pointer;
-            z-index: 1001; /* Make sure it appears above the modal content */
+            z-index: 1001; 
         }
 
         .modal-extra-container {
@@ -1072,7 +1072,6 @@
                     ${project.content}
             `;
 
-            // Links section (now inside the modal-info-container)
             if (project.links && project.links.length > 0) {
                 contentHTML += `
                     <div class="modal-info-section" id="links-section">
@@ -1086,9 +1085,8 @@
                 `;
             }
 
-            contentHTML += `</div>`; // Close modal-info-container
+            contentHTML += `</div>`; 
 
-            // Image grid (if applicable)
             if (project.images && project.images.length > 0) {
                 contentHTML += `
                     <div class="modal-image-grid">
@@ -1101,7 +1099,6 @@
                 `;
             }
 
-            // Extra content (if applicable)
             if (project.extraContent) {
                 contentHTML += `
                     <div class="modal-extra-container">
