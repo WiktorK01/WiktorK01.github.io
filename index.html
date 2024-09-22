@@ -395,6 +395,91 @@
         .links-list a:hover {
             text-decoration: underline;
         }
+        @media screen and (max-width: 768px) {
+            body {
+                font-size: 14px;
+            }
+
+            .container {
+                margin: 10px;
+                padding: 10px;
+            }
+
+            h1 { font-size: 24px; }
+            h2 { font-size: 20px; }
+            h3, .project-title { font-size: 16px; }
+            p, .project-subtitle { font-size: 12px; }
+
+            .header-image {
+                max-width: 100%;
+            }
+
+            .about-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-container .image-container {
+                margin-bottom: 20px;
+            }
+
+            .about-text {
+                margin-left: 0;
+            }
+
+            .grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+                gap: 10px;
+            }
+
+            .grid-item {
+                padding: 10px;
+            }
+
+            .image-container, .project-image, .profile-image {
+                width: 150px;
+                height: 150px;
+            }
+
+            .modal-content {
+                padding: 10px;
+                max-width: 95%;
+            }
+
+            .modal-image-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-main-image-container {
+                height: 200px;
+            }
+
+            .enlarged-image-container {
+                max-width: 95%;
+            }
+
+            .enlarged-image {
+                max-height: calc(95vh - 40px);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .image-container {
+                width: 158px;
+                height: 158px;
+            }
+
+            .image-container::before {
+                width: 100%;
+                height: 100%;
+            }
+
+            .project-image, .profile-image {
+                width: 150px;
+                height: 150px;
+                margin: 4px;
+            }
+        }
     </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
@@ -412,7 +497,7 @@
                 </div>
                 <div class="about-text">
                     <p>In case you were wondering, it's pronounced "Victor"🤓</p>
-                    <p>I'm a Game Designer & Programmer based in NYC who primarily works in Unity. I am currently studying at CUNY BA under City College's Gaming Pathways Department and Hunter's Comp-Sci Department. I've have gained much of my development experience from EGD's Game Studio Program.</p>
+                    <p>I'm a Game Designer & Programmer based in NYC who primarily works in Unity. I am currently studying at CUNY BA under City College's Gaming Pathways Department and Hunter's Comp-Sci Department. I've gained much of my development experience from EGD's Game Studio Program and have held internships at Most Dangerous Games & IndieCade.</p>
                     <p>I've worked on numerous projects of varying lengths and team sizes, from solo-projects & small teams to 100-student mock studios. I'm comfortable in both leading and supporting roles.</p>
                     <p>I love creating elegant experiences that are accessible and easy to pick-up, but hold enough complexity to keep things engaging. Adding juice and ending with a polished product is very important to me.</p>
                     <p>My favorite video game franchise is Pikmin! 🌱</p>
@@ -574,10 +659,8 @@
             <ul class="links-list">
                 <li><i class="fas fa-envelope"></i> <a href="mailto:kolakowskiwiktor247@gmail.com">kolakowskiwiktor247@gmail.com</a></li>
                 <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/wiktor-kolakowski-471961252/" target="_blank">LinkedIn</a></li>
-            </ul>
-            <ul class="links-list">
+                <li><i class="fas fa-file-alt"></i> <a href="WiktorResume.pdf" target="_blank">Resume</a></li>
                 <li><i class="fas fa-gamepad"></i> <a href="https://WiktorK01.itch.io" target="_blank">itch.io</a></li>
-                <li><i class="fas fa-file-alt"></i> <a href="WiktorResumeOld.pdf" target="_blank">Resume</a></li>
             </ul>
         </section>
         
@@ -649,7 +732,7 @@
             links: [
                 { text: "Play Here!", url: "https://studiosleepwalk.itch.io/refold" },
             ],
-            extraContent: "<b>Fun Fact:</b> For the music track, I accidentally plagiarized part of the melody from The Avalanche's \"The Divine Chord,\" which was shockingly unintentional. I heard it again months after development and thought, \"Huh... I though I made that...\""
+            extraContent: "<b>Fun Fact:</b> For the music track, I accidentally plagiarized part of the melody from The Avalanche's \"The Divine Chord,\" which was shockingly unintentional. I heard it again months after development and couldn't help but feel like a fraud💀"
         },
         2: {
             title: "Sling Bee",
@@ -662,7 +745,7 @@
             <h3>Development</h3>
                 <p>This game was developed by me and six others as part of a two-day game jam in partnership with EGD and SGDA, with the theme "Bees!"</p>
 
-                <p>We had the evening to meet and plan our idea, with a full Saturday to get it done. During our evening meeting, we brainstormed ideas, and I explained my vision for the high-score game we ended with, using a poorly drawn MS-Paint image to convey my idea. The game itself was mainly inspired by the Sling Pods from Super Mario Galaxy. The team liked the plan, and I got to work making a game design summary and a task list for every team member to complete during that Saturday.</p>
+                <p>We had the evening to meet and plan our idea, with a full Saturday to get it done. During our evening meeting, we brainstormed ideas, and I explained my vision for the high-score game we ended with, using a poorly drawn MS-Paint image to convey my idea. The team liked the plan, and I got to work making a game design summary and a task list for every team member to complete during that Saturday.</p>
 
                 <p>Unfortunately, the game jam was announced after I was already scheduled to work on the day of the jam, so I couldn't help much in creating the game. However, I was still regularly checking in and offering design advice when needed. By the time I got home, my team had pulled through, and we had a fully finished project!</p>
                 
@@ -676,7 +759,7 @@
             links: [
                 { text: "Play Here!", url: "https://thestreet.itch.io/be-a-bee" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact: The movement was strongly inspired by the Sling Pods from Super Mario Galaxy!"
         },
         3: {
             title: "Opossum Ops",
@@ -688,7 +771,7 @@
             <h3>Development</h3>
                 <p>I and six others made this in EGD for a two-week unthemed game jam. This was my first ever experience as a sole programmer for a project, so it was interesting to get my bearings with Unity. Shortly before this, I started to ideate the basis of a solo game I wanted to make, "Balldyseus." I expressed my curiosity about that movement mechanic, and we decided to "roll" with it!</p>
 
-                <p>Since this year's Aspen game was in 3D, we thought it'd be best to pursue that for this game. We had some animal assets on hand, so we decided to theme the game around escaping a pet store in a hamster ball while collecting food pellets. However, we didn't have any hamster models, so we used an Opossum instead!</p>
+                <p>Since this year's Aspen game was in 3D, we thought it'd be best to pursue that for this game. We had some animal assets on hand, so we decided to theme the game around an Opossum escaping a pet store in a hamster ball while collecting food pellets!</p>
 
                 <p>Programming went fairly smoothly. After the basic movement and pellet collection were done, the main challenge was figuring out how to cut out unique shapes for the level design in the game. Afterward, the designers and I built the level, decorated it, added our Title Screen and Game-Over screen, and we had a finished product.</p>
             <h3>Outcome</h3>
@@ -699,7 +782,7 @@
             links: [
                 { text: "Play Here!", url: "https://wiktork01.itch.io/opossum-ops" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact: Why is an Opossum in a hamster-ball? We initially wanted to have the player be a hamster in a ball, though the asset-pack we had on hand unfortunately did not have any hamsters. "
         },
         4: {
             title: "Chick Chase",
@@ -722,7 +805,6 @@
             links: [
                 { text: "Play Here!", url: "https://wiktork01.itch.io/chick-chase" },
             ],
-            extraContent: "Fun Fact added here!"
         },
         5: {
             title: "Joke's On You",
@@ -735,9 +817,7 @@
             <h3>Development</h3>
                 <p>This was one of my first in-person jams! I worked with four others whom I knew from EGD. We attended the opening ceremony on Friday evening and got to brainstorming the overall concept.</p>
 
-                <p>Since I was the lead programmer and still not fully comfortable with Unity, I thought it'd be best to have a game that leaned more into real-life interaction with others rather than being heavy on the game-mechanics, something akin to a Jackbox party game. With the theme being "Make Me Laugh", we decided to take this as literally as possible. One player is the king, the rest are jesters who must take turns "making them laugh," whoever does that the best wins! With the twist being that while doing their "performance", the King can at any time press X, Y, or B on their controller to spawn a person, place, or thing that the jester must incorporate into their game.</p>
-
-                <p>That night, I stayed up until 4AM outlining the overall code-design for the game for our other programmer. Given how late it was and my inexperience, some of the ideas were less than ideal, but I attached the sheet regardless.</p>
+                <p>Since I was the lead programmer and still not fully comfortable with Unity, I thought it'd be best to have a game that leaned more into real-life interaction with others rather than being heavy on the game-mechanics, something akin to a Jackbox party game. With the theme being "Make Me Laugh", we decided to take this as literally as possible. One player is the king, the rest are jesters who must take turns "making them laugh," whoever does that the best wins! With the twist being that while doing their "performance", the King can at any time press X, Y, or B on their controller to spawn a person, place, or thing that the jester must incorporate into their performance.</p>
 
                 <p>The next day was pure work, I arrived at the center and got the main systems down. Artists made art, musicians made music. I spent that full night working on the game nonstop, which marks my first time pulling an all-nighter for a project! That Sunday, We wrapped up the game & submitted it!</p>
             <h3>Outcome</h3>
@@ -750,7 +830,7 @@
             links: [
                 { text: "Play Here!", url: "https://wiktork01.itch.io/jokes-on-you" },
             ],
-            extraContent: "Fun Fact added here!"
+            extraContent: "Fun Fact: Our trophies for getting the “Best Use of Theme” award were several Pop-Tart scented spa-masks… I did not use mine 🙂"
         },
         6: {
             title: "Striking Hell",
@@ -773,7 +853,6 @@
             links: [
                 { text: "Play Here!", url: "https://thestreet.itch.io/striking-hell-test" },
             ],
-            extraContent: "Fun Fact added here!"
         },
         7: {
             title: "Cornboy (IndieCade Intern)",
@@ -804,7 +883,7 @@
                 { text: "Play Here!", url: "https://wiktork01.itch.io/cornboy" },
                 { text: "More About the Jam!", url: "https://www.indiecade.com/climate-jam/" },
             ],
-            extraContent: "Fun Fact:"
+            extraContent: "Fun Fact: We almost named the project “Cornelius” but realized that didn’t sound silly enough for the concept."
         },
         8: {
             title: "Against The Tide! (Ft: Dr. Rap!)",
@@ -833,7 +912,7 @@
             links: [
                 { text: "Play Here!", url: "https://wiktork01.itch.io/against-the-tide" },
             ],
-            extraContent: "Fun Fact added here!"
+            extraContent: "Fun Fact: Initially we wanted each designer to be a playable character for the player to choose. We decided to limit it to Zahir, making him the definitive “Dr. Rap”"
         },
         9: {
             title: "Pick Yourself Up!",
@@ -862,7 +941,7 @@
             links: [
                 { text: "Play Here!", url: "https://wiktork01.itch.io/pick-yourself-up" },
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact: My buddy Ryan was the first person to ever beat the game. It took him 90 minutes."
         },
         10: {
             title: "Decay & Watch",
@@ -885,12 +964,11 @@
             links: [
                 { text: "Play Here!", url: "https://wiktork01.itch.io/decayandwatch" },
             ],
-            extraContent: "Fun Fact:"
         },
         11: {
             title: "Balldyseus",
             role: "Solo Game Designer & Developer",
-            date: "December 2023 - Present",
+            date: "January 2024 - Present",
             content: `
             <h3>Description</h3>
                 <p>A retelling of the Odyssey where Odysseus is now a giant ball named Balldyseus!</p>
@@ -923,7 +1001,7 @@
                 {text: "Overview Video", url: "https://www.youtube.com/watch?v=iOHmo5aCfPE&ab_channel=Wiktor" 
                 }
             ],
-            extraContent: "*Fun Fact added here!*"
+            extraContent: "Fun Fact: I initially wanted to turn the idea into a roguelike, though I decided to focus on authored levels for the first iteration of the concept and possibly return to it as a roguelike in the future once I’m more experienced."
         },
         12: {
             title: "Untitled Aspen Game",
@@ -941,10 +1019,7 @@
             `,
             mainImage: "AspenOne.png",
             images: [],
-            links: [
-                { text: "EGD Collective Website", url: "https://www.egdcollective.org/home" },
-            ],
-            extraContent: "Fun Fact:"
+
         },
         // Education/Experience entries
         13: {
@@ -963,7 +1038,6 @@
             links: [
             ],
             images: ["MDGOne.jpg", "MDGTwo.jpg", "MDGThree.png"],
-            extraContent: "Fun Fact:"
         },
 
         14: {
@@ -987,7 +1061,6 @@
             links: [
                 { text: "EGD Collective Website", url: "https://www.egdcollective.org" }
             ],
-            extraContent: "Fun Fact:"
         },
         15: {
             title: "EGD Collective",
@@ -1019,7 +1092,6 @@
                 { text: "Program Details", url: "https://www.egdcollective.org/career-programs" }
             ],
             images: [ "EGDOne.jpg", "EGDTwo.jpg", "EGDThree.jpg" ],
-            extraContent: "Fun Fact:"
         },
         16: {
             title: "CUNY BA",
@@ -1046,7 +1118,6 @@
             links: [
                 { text: "CUNY BA Website", url: "https://cunyba.cuny.edu" }
             ],
-            extraContent: "Fun Fact:"
         },
 };
 
